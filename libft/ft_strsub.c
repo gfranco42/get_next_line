@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strsub.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/18 15:55:30 by gfranco           #+#    #+#             */
-/*   Updated: 2018/07/26 13:29:15 by gfranco          ###   ########.fr       */
+/*   Created: 2018/04/19 10:42:42 by gfranco           #+#    #+#             */
+/*   Updated: 2018/05/17 11:28:23 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# define BUFF_SIZE 893
-
-typedef struct		s_gnl
+char	*ft_strsub(char const *s, unsigned int start, size_t len)
 {
-	int				fd;
-	char			*rest;
-	struct s_gnl	*next;
-}					t_gnl;
+	char	*tab;
+	size_t	a;
+	size_t	b;
 
-int		get_next_line(const int fd, char **line);
-
-//PROTO A RETIRER ===>
-
-char	*ft_file_cpy(int fd);
-
-#endif
+	a = 0;
+	b = 0;
+	if (!s)
+		return (NULL);
+	if (!(tab = (char*)ft_memalloc(sizeof(char) * (len + 1))))
+		return (NULL);
+	if (len == 0)
+		return (tab);
+	while (a < len)
+	{
+		tab[a++] = s[start++];
+	}
+	return (tab);
+}

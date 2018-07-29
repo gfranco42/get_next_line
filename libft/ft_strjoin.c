@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/18 15:55:30 by gfranco           #+#    #+#             */
-/*   Updated: 2018/07/26 13:29:15 by gfranco          ###   ########.fr       */
+/*   Created: 2018/04/21 10:04:22 by gfranco           #+#    #+#             */
+/*   Updated: 2018/05/16 14:51:16 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# define BUFF_SIZE 893
-
-typedef struct		s_gnl
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int				fd;
-	char			*rest;
-	struct s_gnl	*next;
-}					t_gnl;
+	char	*tab;
 
-int		get_next_line(const int fd, char **line);
-
-//PROTO A RETIRER ===>
-
-char	*ft_file_cpy(int fd);
-
-#endif
+	if (!s1 || !s2)
+		return (NULL);
+	tab = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!tab)
+		return (NULL);
+	ft_strcpy(tab, s1);
+	ft_strcat(tab, s2);
+	return (tab);
+}

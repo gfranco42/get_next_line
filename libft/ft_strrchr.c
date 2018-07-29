@@ -1,32 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/18 15:55:30 by gfranco           #+#    #+#             */
-/*   Updated: 2018/07/26 13:29:15 by gfranco          ###   ########.fr       */
+/*   Created: 2018/04/26 12:22:08 by gfranco           #+#    #+#             */
+/*   Updated: 2018/05/14 12:50:41 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#include "libft.h"
 
-# include "libft/libft.h"
-# define BUFF_SIZE 893
-
-typedef struct		s_gnl
+char	*ft_strrchr(const char *s, int c)
 {
-	int				fd;
-	char			*rest;
-	struct s_gnl	*next;
-}					t_gnl;
+	int		foll;
+	char	*s2;
+	char	c2;
 
-int		get_next_line(const int fd, char **line);
-
-//PROTO A RETIRER ===>
-
-char	*ft_file_cpy(int fd);
-
-#endif
+	foll = ft_strlen(s);
+	s2 = (char *)s;
+	c2 = (char)c;
+	if (s2[foll] == c2)
+		return (&s2[foll]);
+	else
+	{
+		while (s2[foll] != c2)
+		{
+			foll--;
+			if (foll < 0)
+				return (NULL);
+		}
+	}
+	return (&s2[foll]);
+}
