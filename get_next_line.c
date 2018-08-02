@@ -15,15 +15,10 @@
 
 void			yolo(const int fd, char **line)
 {
-	
-}
-
-int				get_next_line(const int fd, char **line)
-{
 	static t_gnl	*begin_list;
-	t_gnl			*new;
+	t_gnl		*new;
 
-	begin_list = NULL;
+	begin_list = NUL;
 	if (!begin_list)
 	{
 		while (fd != begin_list->fd && begin_list->next)
@@ -38,8 +33,9 @@ int				get_next_line(const int fd, char **line)
 			begin_list->next = new;
 		}
 	}
-	char		buff[BUFF_SIZE + 1];
-	char		*str;
-	size_t		res;
-	size_t		len;
+}
+
+int				get_next_line(const int fd, char **line)
+{
+	if (fd > 0)
 }
