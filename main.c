@@ -6,31 +6,38 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/29 09:58:33 by gfranco           #+#    #+#             */
-/*   Updated: 2018/07/29 10:07:34 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/09/19 19:07:00 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./Fillit/includes/fillit.h"
+#include "get_next_line.h"
 #include <stdio.h>
-#define BUFF_SIZE 7
+
+
+
 
 int		main(int ac, char **av)
 {
-//	char		*str = NULL;
-	char		 buff[BUFF_SIZE + 1];
+	char		buff[BUFF_SIZE + 1];
+	char		*str;
+	char		*last = NULL;
 	int			fd = 0;
 	int			res = 0;
 	int			len = 0;
+	int			i = 0;
 
-	if (ac == 2)
+
+	if (!(str = (char*)malloc(sizeof(*str) * 4097)))
+		return (0);
+	fd = open(av[1], O_RDONLY);
+
+	while (i++ < 3)
 	{
-		fd = open(av[1], O_RDONLY);
 		res = read(fd, buff, BUFF_SIZE);
-		while (buff[len] != '\n')
-			len++;
-		printf("%d\n", len);
-//		str = (char*)malloc(sizeof(str) * res);
-//		ft_strncpy(str, buff, res);
+		str = ft_strcat(str, buff);
+		printf("%s\n", str);
 	}
+
+	close(fd);
 	return (0);
 }
