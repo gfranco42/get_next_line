@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 15:55:30 by gfranco           #+#    #+#             */
-/*   Updated: 2018/09/25 19:17:58 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/09/26 15:31:18 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,7 @@
 
 # include "libft/libft.h"
 # include <stdio.h>
-# define BUFF_SIZE 4
-
-typedef struct	s_stock
-{
-	char		**hold;
-	int			j;
-}				t_stock;
+# define BUFF_SIZE 5
 
 int		get_next_line(const int fd, char **line);
 

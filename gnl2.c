@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/23 13:49:23 by gfranco           #+#    #+#             */
-/*   Updated: 2018/09/25 17:41:22 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/09/26 15:31:11 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ char				*copy_swap(char *stock, char **leftovers)
 	
 }
 */
+char		*ft_strndup(const char *s1, int i)
+{
+	char	*tab;
+
+	tab = (char*)ft_memalloc(i + 1);
+	ft_strncat(tab, s1, i);
+	return (tab);
+}
+
 int					check(char *str)
 {
 	int		i;
@@ -45,52 +54,63 @@ int					gnl2(const int fd)
 {
 	static char		*leftovers;
 	char			*stock;
+	char			*tmp;
 	char			buff[BUFF_SIZE + 1];
 	int				size;
 	int				i;
 
 	i = -1;
-	if (!(stock = (char*)ft_memalloc(4096)))
-		return(-1);
+	stock = (char*)ft_memalloc(1);
 	if (leftovers != NULL)
 	{
-		printf("\033[1;31mleftovers before modif = %s\n\033[0m", leftovers);//		ROUGE ROUGE ROUGE
-		ft_strclr(stock);
+//		printf("\033[1;31mleftovers before modif = %s\n\033[0m", leftovers);//		ROUGE ROUGE ROUGE
 		i = check(leftovers);
-		stock = ft_strncat(stock, leftovers, i);
+		tmp = ft_strndup(leftovers, i);
+		stock = ft_strjoin(stock, tmp);
+//		stock = ft_strncat(stock, leftovers, i);
 		leftovers = &leftovers[i + 1];
-		printf("\033[1;36mnew leftovers: %s\n\033[0m", leftovers);//				CIEL CIEL CIEL
-		printf("i1 = %d\n", i);
+		if (i != -1)
+		{
+			printf("\033[0;35mstock = %s\033[0m", stock);
+			ft_strdel(&tmp);
+			ft_strdel(&stock);
+			return (0);
+		}
+//		printf("\033[1;36mnew leftovers: %s\n\033[0m", leftovers);//				CIEL CIEL CIEL
+//		printf("i1 = %d\n", i);
 //		stock = ft_strdup(leftovers);
-		printf("\033[1;32mstock from leftovers: %s\n\033[0m", stock);//				VERT VERT VERT
+//		printf("\033[1;32mstock from leftovers: %s\n\033[0m", stock);//				VERT VERT VERT
 	}
 	while (i == -1)
 	{
-		printf("THIS IS NOT A RESULT\n");
+//		printf("THIS IS NOT A RESULT\n");
 		size = read(fd, buff, BUFF_SIZE);
+		buff[size] = '\0';
 		if (size == 0)
 			return (0);
-		printf("\033[1;33mBUFF = %s\n\033[0m", buff);//								JAUNE JAUNE JAUNE
+//		printf("\033[1;33mBUFF = %s\n\033[0m", buff);//								JAUNE JAUNE JAUNE
 //		printf("\033[1;33m%c, %c, %c, %c, %c, %c\n", buff[13], buff[14], buff[15], buff[16], buff[17], buff[19]);
 		if ((i = check(buff)) == -1)
 		{
-			printf("i2 = %d\n", i);
-			stock = ft_strcat(stock, buff);
+//			printf("i2 = %d\n", i);
+			stock = ft_strjoin(stock, buff);
 		}
 	}
 	if (buff[i] == '\n' && buff[i + 1] != '\0')
 	{
 		leftovers = ft_strdup(&buff[i + 1]);
-		printf("\033[1;34mleftovers after fill = %s\n\033[0m", leftovers);//		BLEU BLEU BLEU
+//		printf("\033[1;34mleftovers after fill = %s\n\033[0m", leftovers);//		BLEU BLEU BLEU
 	}
-	printf("i3 = %d\n", i);
-	stock = ft_strncat(stock, buff, i);
-	ft_putstr(stock);
-	printf("\033[1;35mfinal stock = %s\n\033[0m", stock);//							VIOLET VIOLET VIOLET
+//	printf("i3 = %d\n", i);
+	tmp = ft_strndup(buff, i);
+	stock = ft_strjoin(stock, tmp);
+	ft_strdel(&tmp);
+//	printf("\033[1;37m%zu\033[0m\n", ft_strlen(stock));
+	printf("\033[1;35mfinal stock = %s\033[0m", stock);//							VIOLET VIOLET VIOLET
 	ft_strdel(&stock);
 	return (0);
 }
-
+/*
 
 int					main(int ac, char **av)
 {
@@ -99,11 +119,12 @@ int					main(int ac, char **av)
 	if (ac == 2)
 		fd = open(av[1], O_RDONLY);
 	gnl2(fd);
-	printf("\n\n\033[1;32mSEPARATION\033[0m\n\n");
+	printf("\033[1;37mSEPARATION\033[0m\n\n");
 	gnl2(fd);
-	printf("\n\n\033[1;32mSEPARATION\033[0m\n\n");
+	printf("\033[1;37mSEPARATION\033[0m\n\n");
 	gnl2(fd);
+//	while (1);
 }
 
-
+*/
 //probleme lorsqu'il y a une ligne entiere qui passe dans leftovers

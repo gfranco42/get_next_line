@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/25 17:47:50 by gfranco           #+#    #+#             */
-/*   Updated: 2018/09/25 19:22:43 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/09/25 19:26:52 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		gnl3(const int fd)
 {
-	static t_stock	stock;
+	static char		**stock;
 	char			buff[BUFF_SIZE + 1];
 	char			*tmp;
 	char			*new;
@@ -40,14 +40,14 @@ int		gnl3(const int fd)
 		}
 	}
 	if (ft_strcmp(tmp, new) > 0)
-		stock.hold = ft_strsplit(tmp, '\n');
+		stock = ft_strsplit(tmp, '\n');
 	else
 	{
-		stock.hold = ft_strsplit(new, '\n');
+		stock = ft_strsplit(new, '\n');
 		printf("c\n");
 	}
 	printf("z\n");
-	printf("%s\n", stock.hold[0]);
+	printf("%s\n", stock[0]);
 	return (0);
 }
 
