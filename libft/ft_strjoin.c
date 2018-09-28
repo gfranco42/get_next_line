@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 10:04:22 by gfranco           #+#    #+#             */
-/*   Updated: 2018/05/16 14:51:16 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/09/26 17:04:11 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	ft_strcpy(tab, s1);
 	ft_strcat(tab, s2);
+	tab[ft_strlen(s1) + ft_strlen(s2) + 1] = '\0';
 	return (tab);
 }

@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 11:52:57 by gfranco           #+#    #+#             */
-/*   Updated: 2018/06/02 07:59:53 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/09/27 16:52:37 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ char	*ft_strncpy(char *dst, const char *src, size_t n)
 		dst[a] = '\0';
 		a++;
 	}
+	dst[a] = '\0';
 	return (dst);
 }
