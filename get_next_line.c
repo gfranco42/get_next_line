@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 15:30:47 by gfranco           #+#    #+#             */
-/*   Updated: 2018/10/01 17:50:34 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/10/05 15:02:19 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,21 +30,20 @@ int			ft_ret_value(char **stock, char **line)
 {
 	char		*tmp;
 
-//	printf("\033[1;37mstock: %s\033[0m\n", *stock);
 	tmp = ft_strchr(*stock, '\n');
-//	printf("\033[1;37mtmp: %s\033[0m\n", tmp);
-//	printf("\033[1;37mlen tmp: %zu\033[0m\n", ft_strlen(tmp));
-/*	if (ft_strlen(tmp) <= 1)
-	{
-		*line = ft_strdup(*stock);
-		return (0);
-	}*/
 	if (tmp[0] == '\n')
 	{
 		*line = ft_strndup(*stock);
 		ft_strcpy(*stock, tmp + 1);
 		return (1);
 	}
+	return (0);
+}
+
+int		short_return(int res, int fd, char **line)
+{
+	if (res == -1 || fd < 0 || BUFF_SIZE < 1 || !line)
+		return (-1);
 	return (0);
 }
 
@@ -55,20 +54,25 @@ int				get_next_line(const int fd, char **line)
 	char		buff[BUFF_SIZE + 1];
 	int			res;
 
-	if (fd < 0 || BUFF_SIZE < 1 || !line || !fd)
-		return (-1);
 	if (!stock)
 		stock = ft_strnew(0);
 	while (!(ft_strchr(stock, '\n')))
 	{
-		if ((res = read(fd, buff, BUFF_SIZE)) == 0)
-			return (0);
-		if (res == -1)
-			return (-1);
+		res = read(fd, buff, BUFF_SIZE);
+		if (res == -1 || (res == 0 && ft_strlen(stock) == 0))
+			return (short_return(res, fd, line));
 		buff[res] = '\0';
 		tmp = ft_strjoin(stock, buff);
+//		ft_strdel(&stock);
 		free(stock);
+		stock = NULL;
 		stock = tmp;
+		if (res == 0 && ft_strlen(stock) > 0)
+		{
+			*line = ft_strndup(stock);
+			ft_strdel(&stock);
+			return (1);
+		}
 	}
 	return (ft_ret_value(&stock, line));
 }
@@ -77,19 +81,21 @@ int		main(int ac, char **av)
 {
 	int		fd;
 	char	*line;
-	int		i = -2;
+	int		count = 0;
+	int		i = 0;
 
 	if (ac != 2)
 		return (0);
 	fd = open(av[1], O_RDONLY);
-	while (i != 0 && i != -1)
+	while ((i = get_next_line(fd, &line)) == 1)
 	{
-		i = get_next_line(fd, &line);
 		printf("\033[1;37m%s\033[0m\n", line);
 		printf("\033[1;35m%d\033[0m\n", i);
+		count++;
 		free(line);
 		line = NULL;
 	}
+	printf("count = %d\n", count);
 //	get_next_line(fd, &line);
 //	printf("\033[1;37m%s\033[0m\n", line);
 //	free(line);
