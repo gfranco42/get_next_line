@@ -6,7 +6,7 @@
 #    By: gfranco <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/06/01 18:05:34 by gfranco           #+#    #+#              #
-#    Updated: 2018/09/16 17:54:10 by gfranco          ###   ########.fr        #
+#    Updated: 2018/10/05 17:35:38 by gfranco          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ SRC = ft_atoi.c                \
 	  ft_striter.c             \
 	  ft_striteri.c            \
 	  ft_strjoin.c             \
+	  ft_strjoinclr.c          \
 	  ft_strlcat.c             \
 	  ft_strlen.c              \
 	  ft_strmap.c              \

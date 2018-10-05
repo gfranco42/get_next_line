@@ -6,13 +6,13 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/21 10:04:22 by gfranco           #+#    #+#             */
-/*   Updated: 2018/09/27 14:22:32 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/10/05 17:35:07 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoinclr(char *s1, char *s2)
+char	*ft_strjoinclr(char *s1, char const *s2)
 {
 	char	*tab;
 
@@ -22,9 +22,7 @@ char	*ft_strjoinclr(char *s1, char *s2)
 	if (!tab)
 		return (NULL);
 	ft_strcpy(tab, s1);
-	free(s1);
 	ft_strcat(tab, s2);
-	free(s2);
-	s1 = tab;
-	return (s1);
+	free(s1);
+	return (tab);
 }

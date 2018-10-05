@@ -6,7 +6,7 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 15:30:47 by gfranco           #+#    #+#             */
-/*   Updated: 2018/10/05 15:09:25 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/10/05 17:30:25 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int		short_return(int res, int fd, char **line)
 int				get_next_line(const int fd, char **line)
 {
 	static char	*stock = NULL;
-	char		*tmp;
+//	char		*tmp;
 	char		buff[BUFF_SIZE + 1];
 	int			res;
 
@@ -62,11 +62,10 @@ int				get_next_line(const int fd, char **line)
 		if (res == -1 || (res == 0 && ft_strlen(stock) == 0))
 			return (short_return(res, fd, line));
 		buff[res] = '\0';
-		tmp = ft_strjoin(stock, buff);
+		stock = ft_strjoinclr(stock, buff);
 //		ft_strdel(&stock);
-		free(stock);
-		stock = NULL;
-		stock = tmp;
+//		free(stock);
+//		stock = tmp;
 		if (res == 0 && ft_strlen(stock) > 0)
 		{
 			*line = ft_strndup(stock);
