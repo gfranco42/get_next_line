@@ -6,17 +6,16 @@
 /*   By: gfranco <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/01 15:30:47 by gfranco           #+#    #+#             */
-/*   Updated: 2018/10/05 17:30:25 by gfranco          ###   ########.fr       */
+/*   Updated: 2018/10/09 11:50:34 by gfranco          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "get_next_line.h"
 
-char		*ft_strndup(const char *stock)
+char			*ft_strndup(const char *stock)
 {
-	char	*line;
-	int		i;
+	char		*line;
+	int			i;
 
 	i = 0;
 	while (stock[i] != '\n' && stock[i] != '\0')
@@ -26,7 +25,7 @@ char		*ft_strndup(const char *stock)
 	return (line);
 }
 
-int			ft_ret_value(char **stock, char **line)
+int				ft_ret_value(char **stock, char **line)
 {
 	char		*tmp;
 
@@ -40,7 +39,7 @@ int			ft_ret_value(char **stock, char **line)
 	return (0);
 }
 
-int		short_return(int res, int fd, char **line)
+int				short_return(int res, int fd, char **line)
 {
 	if (res == -1 || fd < 0 || BUFF_SIZE < 1 || !line)
 		return (-1);
@@ -50,7 +49,6 @@ int		short_return(int res, int fd, char **line)
 int				get_next_line(const int fd, char **line)
 {
 	static char	*stock = NULL;
-//	char		*tmp;
 	char		buff[BUFF_SIZE + 1];
 	int			res;
 
@@ -63,9 +61,6 @@ int				get_next_line(const int fd, char **line)
 			return (short_return(res, fd, line));
 		buff[res] = '\0';
 		stock = ft_strjoinclr(stock, buff);
-//		ft_strdel(&stock);
-//		free(stock);
-//		stock = tmp;
 		if (res == 0 && ft_strlen(stock) > 0)
 		{
 			*line = ft_strndup(stock);
